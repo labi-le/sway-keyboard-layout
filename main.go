@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"log"
+	"os"
 	"os/exec"
 )
 
@@ -61,7 +62,9 @@ func main() {
 	if layout, err := GetFirstActiveKbdLayout(inputs); err != nil {
 		log.Fatal(err)
 	} else {
-		println(layout)
+		if _, err = os.Stdout.WriteString(layout); err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
