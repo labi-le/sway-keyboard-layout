@@ -3,6 +3,15 @@ PROJ_NAME = sway-keyboard-layout
 MAIN_PATH = main.go
 BUILD_PATH = build/package/
 
+INSTALL_PATH = /usr/bin/
+
+install:
+	make build-default
+	sudo cp $(BUILD_PATH)$(PROJ_NAME) $(INSTALL_PATH)$(PROJ_NAME)
+
+uninstall:
+	sudo rm $(INSTALL_PATH)$(PROJ_NAME)
+
 build-default: clean
 	go build --ldflags '-extldflags "-static" -s' -v -o $(BUILD_PATH)$(PROJ_NAME) $(MAIN_PATH)
 
